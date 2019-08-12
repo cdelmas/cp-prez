@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Introduction to Constraint Programming</title>
+
+    <meta
+      name="description"
+      content="A gentle introduction to Constraint Programming"
+    />
+    <meta name="author" content="Cyril Delmas" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/simple.css" id="theme" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? 'css/print/pdf.css'
+        : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!-- [BODY] begining of presentation -->
+
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Constraint Programming</h1>
+          <h3>Une introduction</h3>
+          <p>
+            <small>Cyril Delmas</small>
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <h2>Qui suis-je?</h2>
+          </section>
+          <section>
+            <p>
+              <ul>
+                <li>Senior Backend Engineer @BlueValet</li>
+                <li><img src="images/twitter.png" style="vertical-align: middle; border: 0" height="40" width="40"/> @cyril_delmas</li>
+                <li><img src="images/github.png" style="vertical-align: middle; border: 0" height="40" width="40"/> cdelmas</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <img src="images/blue-valet.png" style="vertical-align: middle; border: 0"/>
+            <aside class="notes">
+              <ul>
+                <li>Service de voiturier en gares et aéroports</li>
+                <li>Présent en France, Espagne et Portugal</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Domaines d'application</h2>
+          </section>
+          <section>
+            <h3>Recherche opérationnelle</h3>
+            <ul>
+              <li>Planning de conférence</li>
+              <li>Parcours de livraison</li>
+              <li>Assignation de tâches</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Biologie moléculaire</h3>
+            <ul>
+              <li>Séquençage d'ADN</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Ingénieurie</h3>
+            <ul>
+              <li>Localisation de pannes</li>
+              <li>Design de circuits</li>
+            </ul>
+          </section>
+        </section>
+        
+        <!-- [TODO] définitions : progressif, un mot après l'autre -->
+        <section>
+          <section>
+            <h2>Définitions</h2>
+          </section>
+          <section>
+            <dl>
+              <dt>Contrainte</dt>
+              <dd>Relation logique entre plusieurs <em>variables</em></dd>
+            </dl>
+            <br/>
+            <br/>
+            <code>X &lt; Y</code>
+          </section>
+          <section>
+            <dl>
+              <dt>Variable</dt>
+              <dd>Inconnue (au sens mathématique) pouvant prendre une valeur dans un <em>domaine</em> donné.</dd>
+            </dl>
+            <br/>
+            <br/>
+            <code>X, Y, Z, T</code>
+          </section>
+          <section>
+            <dl>
+              <dt>Domaine</dt>
+              <dd>Ensemble des valeurs que peut prendre une inconnue. Un domaine peut être borné, et discret ou continu.</dd>
+            </dl>
+            <br/>
+            <br/>
+            <code>ℕ, ℤ, {0, 1}, [0, 100]</code>
+            <aside class="notes">
+              [0,100] est borné, ℕ ne l'est pas.
+              ℕ est discret, [0, 100] est continu si on considère les nombres réels de l'intervalle.
+            </aside>
+          </section>
+          <section>
+            <dl>
+              <dt>Programmation par contraintes</dt>
+              <dd>Méthode de modélisation et résolution de problèmes combinatoires sous la forme de problèmes de satisfaction de contraintes.</dd>
+            </dl>
+            <br/>
+            <br/>
+            <code>P = ((V<sub>1</sub>,..,V<sub>k</sub>) ∈ D<sub>1</sub>×..×D<sub>k</sub>, {C<sub>1</sub>,...,C<sub>n</sub>})</code>
+          </section>
+          <section>
+            <p>Résoudre un problème de satisfaction de contraintes consiste à donner une valeur à chaque inconnue du problème, en respectant les relations logiques.
+              <br/>
+              On obtient alors une solution réalisable.
+            </p>
+            <aside class="notes">
+              domaine discret, techniques = recherche et combinaisons ; domaine infini, technique = méthodes algébriques et numériques
+              <br/>
+              Suivant le type de problème, une solution réalisable n'est pas forcément bonne. Si on souhaite donner un score à une solution, on doit déterminer un objectif.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <img src="images/whaaat.gif" style="vertical-align: middle; border: 0"/>
+        </section>
+        <section>
+          <h2>Fonctionnement d'un solveur</h2>
+        </section>
+
+        <!-- [TODO] Démo(s) --> <!-- triangles, objectif, sudoku, repas avec affinités -->
+
+        <!-- [TODO] questions? -->
+        <section>
+            <img src="images/questions.png" style="vertical-align: middle; border: 0"/>
+        </section>
+
+        <section>
+          <h2>Liens utiles</h2>
+          <ul>
+            <li>http://ktiml.mff.cuni.cz/~bartak/constraints/</li>
+            <aside class="notes">Guide en ligne, Roman Bartak</aside>
+            <li>https://choco-solver.readthedocs.io</li>
+            <li>https://docs.optaplanner.org/7.25.0.Final/optaplanner-docs/html_single/index.html</li>
+            <li>http://www.hakank.org/constraint_programming_blog/</li>
+            <li>https://www.info.ucl.ac.be/~pschaus/oscardoc/oscar-cp.html</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Merci</h2>
+          <img src="images/thank_you.gif" />
+        </section>
+      </div>
+    </div>
+
+    <!-- [BODY] end of presentation -->
+
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          },
+          {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
+              return !!document.querySelector('[data-markdown]');
+            }
+          },
+          { src: 'plugin/highlight/highlight.js', async: true },
+          { src: 'plugin/search/search.js', async: true },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+  </body>
+</html>
