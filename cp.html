@@ -49,8 +49,8 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>Constraint Programming</h1>
-          <h3>Une introduction</h3>
+          <h1>Programmation par contraintes</h1>
+          <h3>Introduction</h3>
           <p>
             <small>Cyril Delmas</small>
           </p>
@@ -61,6 +61,9 @@
             <h2>Qui suis-je?</h2>
           </section>
           <section>
+            <p>
+              <img src="images/me.jpg" style="vertical-align: left; border: 0" height="80" width="80" />
+            </p>
             <p>
               <ul>
                 <li>Senior Backend Engineer @BlueValet</li>
@@ -79,35 +82,22 @@
             </aside>
           </section>
         </section>
-
+        
         <section>
           <section>
-            <h2>Domaines d'application</h2>
+            <h2>Agenda</h2>
           </section>
           <section>
-            <h3>Recherche opérationnelle</h3>
-            <ul>
-              <li>Planning de conférence</li>
-              <li>Parcours de livraison</li>
-              <li>Assignation de tâches</li>
-            </ul>
-          </section>
-          <section>
-            <h3>Biologie moléculaire</h3>
-            <ul>
-              <li>Séquençage d'ADN</li>
-            </ul>
-          </section>
-          <section>
-            <h3>Ingénieurie</h3>
-            <ul>
-              <li>Localisation de pannes</li>
-              <li>Design de circuits</li>
-            </ul>
+            <ol>
+              <li>Définitions</li>
+              <li>Exemples</li>
+              <li>Fonctionnement d'un solveur (si on a le temps)</li>
+              <li>Techniques et patterns</li>
+              <li>Questions (même s'il n'y a jamais 🤔)</li>
+            </ol>
           </section>
         </section>
-        
-        <!-- [TODO] définitions : progressif, un mot après l'autre -->
+
         <section>
           <section>
             <h2>Définitions</h2>
@@ -133,7 +123,7 @@
           <section>
             <dl>
               <dt>Domaine</dt>
-              <dd>Ensemble des valeurs que peut prendre une inconnue. Un domaine peut être borné, et discret ou continu.</dd>
+              <dd>Ensemble des valeurs que peut prendre une inconnue. Un domaine peut être borné ou non, et discret ou continu.</dd>
             </dl>
             <br/>
             <br/>
@@ -153,27 +143,155 @@
             <code>P = ((V<sub>1</sub>,..,V<sub>k</sub>) ∈ D<sub>1</sub>×..×D<sub>k</sub>, {C<sub>1</sub>,...,C<sub>n</sub>})</code>
           </section>
           <section>
-            <p>Résoudre un problème de satisfaction de contraintes consiste à donner une valeur à chaque inconnue du problème, en respectant les relations logiques.
-              <br/>
-              On obtient alors une solution réalisable.
-            </p>
+            <p>Résoudre un problème de satisfaction de contraintes</p>
+            <h2>=</h2>
+            <p>donner une valeur à chaque inconnue du problème, en respectant les relations logiques.</p>
+            <h2>↓</h2>
+            <p>On obtient une solution réalisable.</p>
             <aside class="notes">
               domaine discret, techniques = recherche et combinaisons ; domaine infini, technique = méthodes algébriques et numériques
               <br/>
               Suivant le type de problème, une solution réalisable n'est pas forcément bonne. Si on souhaite donner un score à une solution, on doit déterminer un objectif.
             </aside>
           </section>
+          <section>
+            <h3>Evaluation d'une solution</h3>
+            <p>On peut donner un score à une solution, en donnant un ou plusieurs objectifs = <code>f(V<sub>1</sub>,..,V<sub>k</sub>)</code></p>
+            <p>Exemple classique : minimiser un coût</p>
+          </section>
+          <section>
+            <h3>Pas de solution !</h3>
+            <p>Parfois, on ne peut pas trouver de solution qui respecte toutes les contraintes. On parle de problème <em>sur-contraint</em>.</p>
+            <p>On peut hiérarchiser les contraintes sur plusieurs niveaux (généralement deux, appelés <em>Hard</em> et <em>Soft</em>)</p>
+          </section>
         </section>
         <section>
           <img src="images/whaaat.gif" style="vertical-align: middle; border: 0"/>
         </section>
         <section>
-          <h2>Fonctionnement d'un solveur</h2>
+          <h2>Exemples expliqués</h2>
+          <!-- [TODO] Démo(s) --> <!-- triangles, +objectif, sudoku, repas avec affinités, scheduling de tâches -->
+        </section>
+        <section>
+          <section>
+            <h2>Fonctionnement d'un solveur</h2>
+            <p>Cas des problèmes à variables à domaine fini et discret</p>
+          </section>
+          <section>
+            <p>Basiquement, construction et parcours d'un arbre de combinaisons</p>
+            <aside class="notes">
+              Problème principal : le nb de combinaisons invalides qu'on doit ignorer
+            </aside>
+          </section>
+          <section>
+            <h2>Recherche systématique</h2>
+            <ul>
+              <li>Generate and Test</li>
+              <li>Backtracking</li>
+              <aside class="notes">
+                  Génération d'une solution, et test des contraintes, etc.<br/>
+                  Problème : certes exhaustif (on est sûr de trouver une solution si elle existe), mais très peu efficient<br/>
+                Recherche incrémentale, en choisissant des valeurs consistantes avec celles des variables déjà valuées. Si une valeur n'est pas consistante, on revient en arrière dans l'arbre.<br/>
+                Problèmes: échecs répétés pour les mêmes raisons (pas d'identification des causes d'un échec), travail redondant (pas de mémorisation des conflits), détection des conflits trop tard (quand ils se produisent).<br/>
+                Il existe plein d'algorithmes de backtracking (AC-3, AC-6, ...)
+              </aside>
+            </ul>
+          </section>
+          <section>
+            <h3>Techniques de consistance</h3>
+            <p>Consistance locale (nœud, arc, k-path, ...)</p>
+            <aside class="notes">But : réduire l'espace de recherche; exemple nœud : X est pair -> on élimine tous les nombres impairs de D</aside>
+          </section>
+          <section>
+            <h3>Propagation des contraintes</h3>
+            <p>Il s'agit d'utiliser les techniques de consistance, dans un algorithme de backtracking</p>
+            <ul>
+              <li>Forward checking</li>
+              <li>Look ahead (aka MAC - maintaining arc-consistency)</li>
+              <aside class="notes">
+                * Recherche d'arc-consistance à partir de la variable courant uniquement, sur des variables non-valuées. Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides, on revient en arrière sur la variable sélectionnée.<br/>
+                * Forward checking, mais en appliquant une vérification d'arc-consistance complète (permet alors de détruire toute une branche de l'arbre de recherche).
+              </aside>
+            </ul>
+          </section>
+          <section>
+            <h3>Ordonnancement du choix des variables et des valeurs</h3>
+            <p>Utilisation d'heuristiques : "first fail" pour les variables, "first succeed" pour la valeur</p>
+            <aside class="notes">
+              En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en construisant un arbre plus restreint.<br/>
+              First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.
+              First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle valeur peut réussir.
+            </aside>
+          </section>
+          <section>
+            <h3>Réduction de l'arbre de recherche</h3>
+            <ul>
+              <li>Théorie des graphes</li>
+              <li>Elimination du backtrack en ordonnant les nœuds du graphe</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Algorithmes heuristiques et stochastiques</h2>
+            <ul>
+              <li>Hill-climbing</li>
+              <li>Min-conflicts</li>
+              <li>Tabu search</li>
+              <li>...</li>
+            </ul>
+            <aside class="notes">
+              Ce sont des algo de recherche locale : une solution est générée localement, et les algorithmes tentent de réparer la solution en solution valide<br/>
+              Pas d'assurance de complétude, mais possibilité de trouver une solution acceptable plus rapidement.
+            </aside>
+          </section>
+          
+        </section>
+        <section>
+          <section>
+            <h2>Techniques et patterns</h2>
+          </section>
+          <section>
+            <dl>
+              <dt>Quand utiliser la programmation par contraintes ?</dt>
+              <dd>
+                <ul>
+                  <li>Contraintes complexes et nombreuses</li>
+                  <li>Problèmes avec fonction objective simple</li>
+                  <li>Problèmes de décisions</li>
+                  <li>Problèmes issus des domains où cela fonctionne classiquement</li>
+                </ul>
+              </dd>
+            </dl>
+          </section>
+          <section>
+            <h3>Domaines d'application</h3>
+            <ul>
+              <li>Planning de conférence</li>
+              <li>Parcours de livraison</li>
+              <li>Assignation de tâches</li>
+              <li>Séquençage d'ADN</li>
+              <li>Localisation de pannes</li>
+              <li>Design de circuits</li>
+            </ul>
+          </section>
+          <section>
+            <dl>
+              <dt>Comment faire ?</dt>
+              <dd>
+                <ol>
+                  <li>Identifier les variables du problèmes</li>
+                  <li>Attribuer un domaine aux variables -> taille du problème</li>
+                  <li>Etablir la liste exhaustive des contraintes</li>
+                  <li>Utiliser un algorithme naïf en premier (<em>Premature optimization...</em>), mesurer les performances</li>
+                  <li>Optimiser si besoin (temps, qualité des solutions) en changeant d'algorithme</li>
+                </ol>
+              </dd>
+            </dl>
+            <aside class="notes">
+              Pensez à la binarisation des contraintes (théorème).
+            </aside>
+          </section>
         </section>
 
-        <!-- [TODO] Démo(s) --> <!-- triangles, objectif, sudoku, repas avec affinités -->
-
-        <!-- [TODO] questions? -->
         <section>
             <img src="images/questions.png" style="vertical-align: middle; border: 0"/>
         </section>
@@ -183,10 +301,10 @@
           <ul>
             <li>http://ktiml.mff.cuni.cz/~bartak/constraints/</li>
             <aside class="notes">Guide en ligne, Roman Bartak</aside>
-            <li>https://choco-solver.readthedocs.io</li>
-            <li>https://docs.optaplanner.org/7.25.0.Final/optaplanner-docs/html_single/index.html</li>
+            <li>les documentations de choco-solver, optaplanner, OscaR, ...</li>
             <li>http://www.hakank.org/constraint_programming_blog/</li>
-            <li>https://www.info.ucl.ac.be/~pschaus/oscardoc/oscar-cp.html</li>
+            <li>https://sofdem.github.io/gccat/gccat/sec5.html</li>
+            <aside class="notes">Global constraints catalog</aside>
           </ul>
         </section>
 
