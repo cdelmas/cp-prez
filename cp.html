@@ -93,7 +93,7 @@
               <li>Exemples</li>
               <li>Fonctionnement d'un solveur (si on a le temps)</li>
               <li>Techniques et patterns</li>
-              <li>Questions (même s'il n'y a jamais 🤔)</li>
+              <li>Questions (même s'il n'y en a jamais 🤔)</li>
             </ol>
           </section>
         </section>
@@ -147,7 +147,7 @@
             <h2>=</h2>
             <p>donner une valeur à chaque inconnue du problème, en respectant les relations logiques.</p>
             <h2>↓</h2>
-            <p>On obtient une solution réalisable.</p>
+            <p>On obtient une solution.</p>
             <aside class="notes">
               domaine discret, techniques = recherche et combinaisons ; domaine infini, technique = méthodes algébriques et numériques
               <br/>
@@ -160,17 +160,63 @@
             <p>Exemple classique : minimiser un coût</p>
           </section>
           <section>
-            <h3>Pas de solution !</h3>
-            <p>Parfois, on ne peut pas trouver de solution qui respecte toutes les contraintes. On parle de problème <em>sur-contraint</em>.</p>
-            <p>On peut hiérarchiser les contraintes sur plusieurs niveaux (généralement deux, appelés <em>Hard</em> et <em>Soft</em>)</p>
+            <h3>Pas de solution = problème <em>sur-contraint</em></h3>
+            <p>On doit relaxer quelques contraintes pour obtenir une solution</p>
+            <ul>
+              <li>En hiérarchisant les contraintes (requises, optionnelles, ...)</li>
+              <li>En attribuant des poids, et en le maximisant</li>
+              <li>En appliquant des coefficients aléatoires (fuzzy)</li>
+            </ul>
           </section>
         </section>
         <section>
           <img src="images/whaaat.gif" style="vertical-align: middle; border: 0"/>
         </section>
         <section>
-          <h2>Exemples expliqués</h2>
-          <!-- [TODO] Démo(s) --> <!-- triangles, +objectif, sudoku, repas avec affinités, scheduling de tâches -->
+          <section>
+            <h2>Exemples expliqués</h2>
+          </section>
+          <section>
+              <h3>Problème n°1 : Pythagore</h3>
+              <p>Trouver tous les triangles rectangles de périmètre inférieur à 200.</p>
+          </section>
+          <section>
+            <h3>Solution</h3>
+            <img src="images/triangle.png" width="400" height="400" style="float: left; vertical-align: middle; border: 0"/>
+            <div style="overflow: hidden; padding-left: 50px">
+              <p>Théorème de Pythagore :<br/> <code>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></code></p>
+              <p>Contrainte de périmètre : <br/> <code>a + b + c ≤ 200</code></p>
+              <p>Quel domaine pour les variables ?</p>
+            </div>              
+          </section>
+          <section>
+            <h3>Problème n°2 : Pythagore bis</h3>
+            <p>Trouver le triangle rectangle de périmètre inférieur à 200 ayant la plus grande aire.</p>
+          </section>
+          <section>
+            <h3>Solution</h3>
+            <p>On reprend le modèle précédent, et on y ajoute une variable sur laquelle on va calculer un objectif</p>
+            <p><code>maximize(area)</code></p>
+          </section>
+          <section>
+            <h3>Problème n°3 : Sudoku</h3>
+            <img src="images/sudoku.png" width="400" height="400" style="float: left; vertical-align: middle; border: 0"/>
+            <div style="overflow: hidden; padding-left: 50px">
+              <p>Résoudre un sudoku de niveau diabolique.</p>
+            </div>   
+          </section>
+          <section>
+            <h3>Solution</h3>
+            <p>
+              <ul>
+                <li>Chaque case du tableau est une variable, de domaine <code>{1,2,..,9}</code></li>
+                <li>Les cases déjà remplies ont un domaine singleton (de la valeur donnée)</li>
+                <li>Les chiffres d'une même colonne sont tous différents</li>
+                <li>Les chiffres d'une même ligne sont tous différents</li>
+                <li>Les chiffres d'une même région sont tous différents</li>
+              </ul>
+            </p>
+          </section>
         </section>
         <section>
           <section>
