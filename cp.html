@@ -1,400 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <title>Introduction to Constraint Programming</title>
+<head>
+  <meta charset="utf-8" />
 
-    <meta
-      name="description"
-      content="A gentle introduction to Constraint Programming"
-    />
-    <meta name="author" content="Cyril Delmas" />
+  <title>Introduction to Constraint Programming</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+  <meta name="description" content="A gentle introduction to Constraint Programming" />
+  <meta name="author" content="Cyril Delmas" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/reveal.css" />
-    <link rel="stylesheet" href="css/theme/simple.css" id="theme" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="lib/css/monokai.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/reveal.css" />
+  <link rel="stylesheet" href="css/theme/simple.css" id="theme" />
 
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match(/print-pdf/gi)
-        ? 'css/print/pdf.css'
-        : 'css/print/paper.css';
-      document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css" />
 
-    <!--[if lt IE 9]>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi)
+      ? 'css/print/pdf.css'
+      : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <!--[if lt IE 9]>
       <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
-    <!-- [BODY] begining of presentation -->
+<body>
+  <!-- [BODY] begining of presentation -->
 
-    <div class="reveal">
-      <!-- Any section element inside of this container is displayed as a slide -->
-      <div class="slides">
+  <div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <section>
+        <h1>Programmation par contraintes</h1>
+        <h3>Introduction</h3>
+        <p>
+          <small>Cyril Delmas</small>
+        </p>
+      </section>
+
+      <section>
         <section>
-          <h1>Programmation par contraintes</h1>
-          <h3>Introduction</h3>
+          <h2>Qui suis-je?</h2>
+        </section>
+        <section>
           <p>
-            <small>Cyril Delmas</small>
+            <img src="images/me.jpg" style="vertical-align: left; border: 0" height="80" width="80" />
+          </p>
+          <p>
+            <ul>
+              <li>Senior Backend Engineer @blue_valet</li>
+              <li><img src="images/twitter.png" style="vertical-align: middle; border: 0" height="40" width="40" />
+                @cyril_delmas</li>
+              <li><img src="images/github.png" style="vertical-align: middle; border: 0" height="40" width="40" />
+                cdelmas</li>
+            </ul>
           </p>
         </section>
+        <section>
+          <img src="images/blue-valet.png" style="vertical-align: middle; border: 0" />
+          <aside class="notes">
+            <ul>
+              <li>Service de voiturier en gares et aéroports</li>
+              <li>Présent en France, Espagne et Portugal</li>
+            </ul>
+          </aside>
+        </section>
+      </section>
 
+      <section>
         <section>
-          <section>
-            <h2>Qui suis-je?</h2>
-          </section>
-          <section>
-            <p>
-              <img src="images/me.jpg" style="vertical-align: left; border: 0" height="80" width="80" />
-            </p>
-            <p>
-              <ul>
-                <li>Senior Backend Engineer @BlueValet</li>
-                <li><img src="images/twitter.png" style="vertical-align: middle; border: 0" height="40" width="40"/> @cyril_delmas</li>
-                <li><img src="images/github.png" style="vertical-align: middle; border: 0" height="40" width="40"/> cdelmas</li>
-              </ul>
-            </p>
-          </section>
-          <section>
-            <img src="images/blue-valet.png" style="vertical-align: middle; border: 0"/>
-            <aside class="notes">
-              <ul>
-                <li>Service de voiturier en gares et aéroports</li>
-                <li>Présent en France, Espagne et Portugal</li>
-              </ul>
-            </aside>
-          </section>
+          <h2>Agenda</h2>
         </section>
-        
         <section>
-          <section>
-            <h2>Agenda</h2>
-          </section>
-          <section>
-            <ol>
-              <li>Définitions</li>
-              <li>Exemples</li>
-              <li>Fonctionnement d'un solveur (si on a le temps)</li>
-              <li>Techniques et patterns</li>
-              <li>Questions (même s'il n'y en a jamais 🤔)</li>
-            </ol>
-          </section>
+          <ol>
+            <li>Définitions</li>
+            <li>Exemples</li>
+            <li>Fonctionnement d'un solveur (si on a le temps)</li>
+            <li>Techniques et patterns</li>
+            <li>Questions (même s'il n'y en a jamais 🤔)</li>
+          </ol>
         </section>
+      </section>
 
+      <section>
         <section>
-          <section>
-            <h2>Définitions</h2>
-          </section>
-          <section>
-            <dl>
-              <dt>Contrainte</dt>
-              <dd>Relation logique entre plusieurs <em>variables</em></dd>
-            </dl>
-            <br/>
-            <br/>
-            <code>X &lt; Y</code>
-          </section>
-          <section>
-            <dl>
-              <dt>Variable</dt>
-              <dd>Inconnue (au sens mathématique) pouvant prendre une valeur dans un <em>domaine</em> donné.</dd>
-            </dl>
-            <br/>
-            <br/>
-            <code>X, Y, Z, T</code>
-          </section>
-          <section>
-            <dl>
-              <dt>Domaine</dt>
-              <dd>Ensemble des valeurs que peut prendre une inconnue. Un domaine peut être borné ou non, et discret ou continu.</dd>
-            </dl>
-            <br/>
-            <br/>
-            <code>ℕ, ℤ, {0, 1}, [0, 100]</code>
-            <aside class="notes">
-              [0,100] est borné, ℕ ne l'est pas.
-              ℕ est discret, [0, 100] est continu si on considère les nombres réels de l'intervalle.
-            </aside>
-          </section>
-          <section>
-            <dl>
-              <dt>Programmation par contraintes</dt>
-              <dd>Méthode de modélisation et résolution de problèmes combinatoires sous la forme de problèmes de satisfaction de contraintes.</dd>
-            </dl>
-            <br/>
-            <br/>
-            <code>P = ((V<sub>1</sub>,..,V<sub>k</sub>) ∈ D<sub>1</sub>×..×D<sub>k</sub>, {C<sub>1</sub>,...,C<sub>n</sub>})</code>
-          </section>
-          <section>
-            <p>Résoudre un problème de satisfaction de contraintes</p>
-            <h2>=</h2>
-            <p>donner une valeur à chaque inconnue du problème, en respectant les relations logiques.</p>
-            <h2>↓</h2>
-            <p>On obtient une solution.</p>
-            <aside class="notes">
-              domaine discret, techniques = recherche et combinaisons ; domaine infini, technique = méthodes algébriques et numériques
-              <br/>
-              Suivant le type de problème, une solution réalisable n'est pas forcément bonne. Si on souhaite donner un score à une solution, on doit déterminer un objectif.
-            </aside>
-          </section>
-          <section>
-            <h3>Evaluation d'une solution</h3>
-            <p>On peut donner un score à une solution, en donnant un ou plusieurs objectifs = <code>f(V<sub>1</sub>,..,V<sub>k</sub>)</code></p>
-            <p>Exemple classique : minimiser un coût</p>
-          </section>
-          <section>
-            <h3>Pas de solution = problème <em>sur-contraint</em></h3>
-            <p>On doit relaxer quelques contraintes pour obtenir une solution</p>
-            <ul>
-              <li>En hiérarchisant les contraintes (requises, optionnelles, ...)</li>
-              <li>En attribuant des poids, et en le maximisant</li>
-              <li>En appliquant des coefficients aléatoires (fuzzy)</li>
-            </ul>
-          </section>
+          <h2>Définitions</h2>
         </section>
         <section>
-          <img src="images/whaaat.gif" style="vertical-align: middle; border: 0"/>
+          <dl>
+            <dt>Contrainte</dt>
+            <dd>Relation logique entre plusieurs <em>variables</em></dd>
+          </dl>
+          <br />
+          <br />
+          <code>X &lt; Y</code>
         </section>
         <section>
-          <section>
-            <h2>Exemples expliqués</h2>
-          </section>
-          <section>
-              <h3>Problème n°1 : Pythagore</h3>
-              <p>Trouver tous les triangles rectangles de périmètre inférieur à 200.</p>
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <img src="images/triangle.png" width="400" height="400" style="float: left; vertical-align: middle; border: 0"/>
-            <div style="overflow: hidden; padding-left: 50px">
-              <p>Théorème de Pythagore :<br/> <code>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></code></p>
-              <p>Contrainte de périmètre : <br/> <code>a + b + c ≤ 200</code></p>
-              <p>Quel domaine pour les variables ?</p>
-            </div>              
-          </section>
-          <section>
-            <h3>Problème n°2 : Pythagore bis</h3>
-            <p>Trouver le triangle rectangle de périmètre inférieur à 200 ayant la plus grande aire.</p>
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <p>On reprend le modèle précédent, et on y ajoute une variable sur laquelle on va calculer un objectif</p>
-            <p><code>maximize(area)</code></p>
-          </section>
-          <section>
-            <h3>Problème n°3 : Sudoku</h3>
-            <img src="images/sudoku.png" width="400" height="400" style="float: left; vertical-align: middle; border: 0"/>
-            <div style="overflow: hidden; padding-left: 50px">
-              <p>Résoudre un sudoku de niveau diabolique.</p>
-            </div>   
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <p>
-              <ul>
-                <li>Chaque case du tableau est une variable, de domaine <code>{1,2,..,9}</code></li>
-                <li>Les cases déjà remplies ont un domaine singleton (de la valeur donnée)</li>
-                <li>Les chiffres d'une même colonne sont tous différents</li>
-                <li>Les chiffres d'une même ligne sont tous différents</li>
-                <li>Les chiffres d'une même région sont tous différents</li>
-              </ul>
-            </p>
-          </section>
+          <dl>
+            <dt>Variable</dt>
+            <dd>Inconnue (au sens mathématique) pouvant prendre une valeur dans un <em>domaine</em> donné.</dd>
+          </dl>
+          <br />
+          <br />
+          <code>X, Y, Z, T</code>
         </section>
         <section>
-          <section>
-            <h2>Fonctionnement d'un solveur</h2>
-            <p>Cas des problèmes à variables à domaine fini et discret</p>
-          </section>
-          <section>
-            <p>Basiquement, construction et parcours d'un arbre de combinaisons</p>
-            <aside class="notes">
-              Problème principal : le nb de combinaisons invalides qu'on doit ignorer
-            </aside>
-          </section>
-          <section>
-            <h2>Recherche systématique</h2>
-            <ul>
-              <li>Generate and Test</li>
-              <li>Backtracking</li>
-              <aside class="notes">
-                  Génération d'une solution, et test des contraintes, etc.<br/>
-                  Problème : certes exhaustif (on est sûr de trouver une solution si elle existe), mais très peu efficient<br/>
-                Recherche incrémentale, en choisissant des valeurs consistantes avec celles des variables déjà valuées. Si une valeur n'est pas consistante, on revient en arrière dans l'arbre.<br/>
-                Problèmes: échecs répétés pour les mêmes raisons (pas d'identification des causes d'un échec), travail redondant (pas de mémorisation des conflits), détection des conflits trop tard (quand ils se produisent).<br/>
-                Il existe plein d'algorithmes de backtracking (AC-3, AC-6, ...)
-              </aside>
-            </ul>
-          </section>
-          <section>
-            <h3>Techniques de consistance</h3>
-            <p>Consistance locale (nœud, arc, k-path, ...)</p>
-            <aside class="notes">But : réduire l'espace de recherche; exemple nœud : X est pair -> on élimine tous les nombres impairs de D</aside>
-          </section>
-          <section>
-            <h3>Propagation des contraintes</h3>
-            <p>Il s'agit d'utiliser les techniques de consistance, dans un algorithme de backtracking</p>
-            <ul>
-              <li>Forward checking</li>
-              <li>Look ahead (aka MAC - maintaining arc-consistency)</li>
-              <aside class="notes">
-                * Recherche d'arc-consistance à partir de la variable courant uniquement, sur des variables non-valuées. Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides, on revient en arrière sur la variable sélectionnée.<br/>
-                * Forward checking, mais en appliquant une vérification d'arc-consistance complète (permet alors de détruire toute une branche de l'arbre de recherche).
-              </aside>
-            </ul>
-          </section>
-          <section>
-            <h3>Ordonnancement du choix des variables et des valeurs</h3>
-            <p>Utilisation d'heuristiques : "first fail" pour les variables, "first succeed" pour la valeur</p>
-            <aside class="notes">
-              En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en construisant un arbre plus restreint.<br/>
-              First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.
-              First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle valeur peut réussir.
-            </aside>
-          </section>
-          <section>
-            <h3>Réduction de l'arbre de recherche</h3>
-            <ul>
-              <li>Théorie des graphes</li>
-              <li>Elimination du backtrack en ordonnant les nœuds du graphe</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Algorithmes heuristiques et stochastiques</h2>
-            <ul>
-              <li>Hill-climbing</li>
-              <li>Min-conflicts</li>
-              <li>Tabu search</li>
-              <li>...</li>
-            </ul>
-            <aside class="notes">
-              Ce sont des algo de recherche locale : une solution est générée localement, et les algorithmes tentent de réparer la solution en solution valide<br/>
-              Pas d'assurance de complétude, mais possibilité de trouver une solution acceptable plus rapidement.
-            </aside>
-          </section>
-          
+          <dl>
+            <dt>Domaine</dt>
+            <dd>Ensemble des valeurs que peut prendre une inconnue. Un domaine peut être borné ou non, et discret ou
+              continu.</dd>
+          </dl>
+          <br />
+          <br />
+          <code>ℕ, ℤ, {0, 1}, [0, 100]</code>
+          <aside class="notes">
+            [0,100] est borné, ℕ ne l'est pas.
+            ℕ est discret, [0, 100] est continu si on considère les nombres réels de l'intervalle.
+          </aside>
         </section>
         <section>
-          <section>
-            <h2>Techniques et patterns</h2>
-          </section>
-          <section>
-            <dl>
-              <dt>Quand utiliser la programmation par contraintes ?</dt>
-              <dd>
-                <ul>
-                  <li>Contraintes complexes et nombreuses</li>
-                  <li>Problèmes avec fonction objective simple</li>
-                  <li>Problèmes de décisions</li>
-                  <li>Problèmes issus des domains où cela fonctionne classiquement</li>
-                </ul>
-              </dd>
-            </dl>
-          </section>
-          <section>
-            <h3>Domaines d'application</h3>
-            <ul>
-              <li>Planning de conférence</li>
-              <li>Parcours de livraison</li>
-              <li>Assignation de tâches</li>
-              <li>Séquençage d'ADN</li>
-              <li>Localisation de pannes</li>
-              <li>Design de circuits</li>
-            </ul>
-          </section>
-          <section>
-            <dl>
-              <dt>Comment faire ?</dt>
-              <dd>
-                <ol>
-                  <li>Identifier les variables du problèmes</li>
-                  <li>Attribuer un domaine aux variables -> taille du problème</li>
-                  <li>Etablir la liste exhaustive des contraintes</li>
-                  <li>Utiliser un algorithme naïf en premier (<em>Premature optimization...</em>), mesurer les performances</li>
-                  <li>Optimiser si besoin (temps, qualité des solutions) en changeant d'algorithme</li>
-                </ol>
-              </dd>
-            </dl>
-            <aside class="notes">
-              Pensez à la binarisation des contraintes (théorème).
-            </aside>
-          </section>
+          <dl>
+            <dt>Programmation par contraintes</dt>
+            <dd>Méthode de modélisation et résolution de problèmes combinatoires sous la forme de problèmes de
+              satisfaction de contraintes.</dd>
+          </dl>
+          <br />
+          <br />
+          <code>P = ((V<sub>1</sub>,..,V<sub>k</sub>) ∈ D<sub>1</sub>×..×D<sub>k</sub>, {C<sub>1</sub>,...,C<sub>n</sub>})</code>
         </section>
-
         <section>
-            <img src="images/questions.png" style="vertical-align: middle; border: 0"/>
+          <p>Résoudre un problème de satisfaction de contraintes</p>
+          <h2>=</h2>
+          <p>donner une valeur à chaque inconnue du problème, en respectant les relations logiques.</p>
+          <h2>↓</h2>
+          <p>On obtient une solution.</p>
+          <aside class="notes">
+            domaine discret, techniques = recherche et combinaisons ; domaine infini, technique = méthodes algébriques
+            et numériques
+            <br />
+            Suivant le type de problème, une solution réalisable n'est pas forcément bonne. Si on souhaite donner un
+            score à une solution, on doit déterminer un objectif.
+          </aside>
         </section>
-
         <section>
-          <h2>Liens utiles</h2>
+          <h3>Evaluation d'une solution</h3>
+          <p>On peut donner un score à une solution, en donnant un ou plusieurs objectifs =
+            <code>f(V<sub>1</sub>,..,V<sub>k</sub>)</code></p>
+          <p>Exemple classique : minimiser un coût</p>
+        </section>
+        <section>
+          <h3>Pas de solution = problème <em>sur-contraint</em></h3>
+          <p>On doit relaxer quelques contraintes pour obtenir une solution</p>
           <ul>
-            <li>http://ktiml.mff.cuni.cz/~bartak/constraints/</li>
-            <aside class="notes">Guide en ligne, Roman Bartak</aside>
-            <li>les documentations de choco-solver, optaplanner, OscaR, ...</li>
-            <li>http://www.hakank.org/constraint_programming_blog/</li>
-            <li>https://sofdem.github.io/gccat/gccat/sec5.html</li>
-            <aside class="notes">Global constraints catalog</aside>
+            <li>En hiérarchisant les contraintes (requises, optionnelles, ...)</li>
+            <li>En attribuant des poids, et en le maximisant</li>
+            <li>En appliquant des coefficients aléatoires (fuzzy)</li>
           </ul>
         </section>
-
+      </section>
+      <section>
+        <img src="images/whaaat.gif" style="vertical-align: middle; border: 0" />
+      </section>
+      <section>
         <section>
-          <h2>Merci</h2>
-          <img src="images/thank_you.gif" />
+          <h2>Exemples expliqués</h2>
         </section>
-      </div>
+        <section>
+          <h3>Problème n°1 : Pythagore</h3>
+          <p>Trouver tous les triangles rectangles de périmètre inférieur à 200.</p>
+        </section>
+        <section>
+          <h3>Solution</h3>
+          <img src="images/triangle.png" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Théorème de Pythagore :<br /> <code>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></code></p>
+            <p>Contrainte de périmètre : <br /> <code>a + b + c ≤ 200</code></p>
+            <p>Quel domaine pour les variables ?</p>
+          </div>
+        </section>
+        <section>
+          <h3>Problème n°2 : Pythagore bis</h3>
+          <p>Trouver le triangle rectangle de périmètre inférieur à 200 ayant la plus grande aire.</p>
+        </section>
+        <section>
+          <h3>Solution</h3>
+          <p>On reprend le modèle précédent, et on y ajoute une variable sur laquelle on va calculer un objectif</p>
+          <p><code>maximize(area)</code></p>
+        </section>
+        <section>
+          <h3>Problème n°3 : Sudoku</h3>
+          <img src="images/sudoku.png" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Résoudre un sudoku de niveau diabolique.</p>
+          </div>
+        </section>
+        <section>
+          <h3>Solution</h3>
+          <p>
+            <ul>
+              <li>Chaque case du tableau est une variable, de domaine <code>{1,2,..,9}</code></li>
+              <li>Les cases déjà remplies ont un domaine singleton (de la valeur donnée)</li>
+              <li>Les chiffres d'une même colonne sont tous différents</li>
+              <li>Les chiffres d'une même ligne sont tous différents</li>
+              <li>Les chiffres d'une même région sont tous différents</li>
+            </ul>
+          </p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Fonctionnement d'un solveur</h2>
+          <p>Cas des problèmes à variables à domaine fini et discret</p>
+        </section>
+        <section>
+          <p>Basiquement, construction et parcours d'un arbre de combinaisons</p>
+          <aside class="notes">
+            Problème principal : le nb de combinaisons invalides qu'on doit ignorer
+          </aside>
+        </section>
+        <section>
+          <h2>Recherche systématique</h2>
+          <ul>
+            <li>Generate and Test</li>
+            <li>Backtracking</li>
+            <aside class="notes">
+              Génération d'une solution, et test des contraintes, etc.<br />
+              Problème : certes exhaustif (on est sûr de trouver une solution si elle existe), mais très peu
+              efficient<br />
+              Recherche incrémentale, en choisissant des valeurs consistantes avec celles des variables déjà valuées. Si
+              une valeur n'est pas consistante, on revient en arrière dans l'arbre.<br />
+              Problèmes: échecs répétés pour les mêmes raisons (pas d'identification des causes d'un échec), travail
+              redondant (pas de mémorisation des conflits), détection des conflits trop tard (quand ils se
+              produisent).<br />
+              Il existe plein d'algorithmes de backtracking (AC-3, AC-6, ...)
+            </aside>
+          </ul>
+        </section>
+        <section>
+          <h3>Techniques de consistance</h3>
+          <p>Consistance locale (nœud, arc, k-path, ...)</p>
+          <aside class="notes">But : réduire l'espace de recherche; exemple nœud : X est pair -> on élimine tous les
+            nombres impairs de D</aside>
+        </section>
+        <section>
+          <h3>Propagation des contraintes</h3>
+          <p>Il s'agit d'utiliser les techniques de consistance, dans un algorithme de backtracking</p>
+          <ul>
+            <li>Forward checking</li>
+            <li>Look ahead (aka MAC - maintaining arc-consistency)</li>
+            <aside class="notes">
+              * Recherche d'arc-consistance à partir de la variable courant uniquement, sur des variables non-valuées.
+              Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides,
+              on revient en arrière sur la variable sélectionnée.<br />
+              * Forward checking, mais en appliquant une vérification d'arc-consistance complète (permet alors de
+              détruire toute une branche de l'arbre de recherche).
+            </aside>
+          </ul>
+        </section>
+        <section>
+          <h3>Ordonnancement du choix des variables et des valeurs</h3>
+          <p>Utilisation d'heuristiques : "first fail" pour les variables, "first succeed" pour la valeur</p>
+          <aside class="notes">
+            En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en
+            construisant un arbre plus restreint.<br />
+            First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.
+            First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle
+            valeur peut réussir.
+          </aside>
+        </section>
+        <section>
+          <h3>Réduction de l'arbre de recherche</h3>
+          <ul>
+            <li>Théorie des graphes</li>
+            <li>Elimination du backtrack en ordonnant les nœuds du graphe</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Algorithmes heuristiques et stochastiques</h2>
+          <ul>
+            <li>Hill-climbing</li>
+            <li>Min-conflicts</li>
+            <li>Tabu search</li>
+            <li>...</li>
+          </ul>
+          <aside class="notes">
+            Ce sont des algo de recherche locale : une solution est générée localement, et les algorithmes tentent de
+            réparer la solution en solution valide<br />
+            Pas d'assurance de complétude, mais possibilité de trouver une solution acceptable plus rapidement.
+          </aside>
+        </section>
+
+      </section>
+      <section>
+        <section>
+          <h2>Techniques et patterns</h2>
+        </section>
+        <section>
+          <dl>
+            <dt>Quand utiliser la programmation par contraintes ?</dt>
+            <dd>
+              <ul>
+                <li>Contraintes complexes et nombreuses</li>
+                <li>Problèmes avec fonction objective simple</li>
+                <li>Problèmes de décisions</li>
+                <li>Problèmes issus des domains où cela fonctionne classiquement</li>
+              </ul>
+            </dd>
+          </dl>
+        </section>
+        <section>
+          <h3>Domaines d'application</h3>
+          <ul>
+            <li>Planning de conférence</li>
+            <li>Parcours de livraison</li>
+            <li>Assignation de tâches</li>
+            <li>Séquençage d'ADN</li>
+            <li>Localisation de pannes</li>
+            <li>Design de circuits</li>
+          </ul>
+        </section>
+        <section>
+          <dl>
+            <dt>Comment faire ?</dt>
+            <dd>
+              <ol>
+                <li>Identifier les variables du problèmes</li>
+                <li>Attribuer un domaine aux variables -> taille du problème</li>
+                <li>Etablir la liste exhaustive des contraintes</li>
+                <li>Utiliser un algorithme naïf en premier (<em>Premature optimization...</em>), mesurer les
+                  performances</li>
+                <li>Optimiser si besoin (temps, qualité des solutions) en changeant d'algorithme</li>
+              </ol>
+            </dd>
+          </dl>
+          <aside class="notes">
+            Pensez à la binarisation des contraintes (théorème).
+          </aside>
+        </section>
+      </section>
+
+      <section>
+        <img src="images/questions.png" style="vertical-align: middle; border: 0" />
+      </section>
+
+      <section>
+        <h2>Liens utiles</h2>
+        <ul>
+          <li>http://ktiml.mff.cuni.cz/~bartak/constraints/</li>
+          <aside class="notes">Guide en ligne, Roman Bartak</aside>
+          <li>les documentations de choco-solver, optaplanner, OscaR, ...</li>
+          <li>http://www.hakank.org/constraint_programming_blog/</li>
+          <li>https://sofdem.github.io/gccat/gccat/sec5.html</li>
+          <aside class="notes">Global constraints catalog</aside>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Merci</h2>
+        <img src="images/thank_you.gif" />
+      </section>
     </div>
+  </div>
 
-    <!-- [BODY] end of presentation -->
+  <!-- [BODY] end of presentation -->
 
-    <script src="js/reveal.js"></script>
+  <script src="js/reveal.js"></script>
 
-    <script>
-      // More info https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        center: true,
-        hash: true,
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
 
-        transition: 'slide', // none/fade/slide/convex/concave/zoom
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-        // More info https://github.com/hakimel/reveal.js#dependencies
-        dependencies: [
-          {
-            src: 'plugin/markdown/marked.js',
-            condition: function() {
-              return !!document.querySelector('[data-markdown]');
-            }
-          },
-          {
-            src: 'plugin/markdown/markdown.js',
-            condition: function() {
-              return !!document.querySelector('[data-markdown]');
-            }
-          },
-          { src: 'plugin/highlight/highlight.js', async: true },
-          { src: 'plugin/search/search.js', async: true },
-          { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true }
-        ]
-      });
-    </script>
-  </body>
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [
+        {
+          src: 'plugin/markdown/marked.js',
+          condition: function () {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'plugin/markdown/markdown.js',
+          condition: function () {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        { src: 'plugin/highlight/highlight.js', async: true },
+        { src: 'plugin/search/search.js', async: true },
+        { src: 'plugin/zoom-js/zoom.js', async: true },
+        { src: 'plugin/notes/notes.js', async: true }
+      ]
+    });
+  </script>
+</body>
+
 </html>
