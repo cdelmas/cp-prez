@@ -74,7 +74,7 @@
           <aside class="notes">
             <ul>
               <li>Service de voiturier en gares et aéroports</li>
-              <li>Présent en France, Espagne et Portugal</li>
+              <li>Présent en France,Belgique, Espagne et Portugal (bientôt Italie)</li>
             </ul>
           </aside>
         </section>
@@ -90,7 +90,7 @@
             <li>Exemples</li>
             <li>Fonctionnement d'un solveur (si on a le temps)</li>
             <li>Techniques et patterns</li>
-            <li>Questions (même s'il n'y en a jamais 🤔)</li>
+            <li>Questions</li>
           </ol>
         </section>
       </section>
@@ -115,7 +115,7 @@
           </dl>
           <br />
           <br />
-          <code>X, Y, Z, T</code>
+          <code>X, Y, Z, nbCars, start, …</code>
         </section>
         <section>
           <dl>
@@ -221,39 +221,108 @@
             </ul>
           </p>
         </section>
+        <section>
+          <h3>Problème n°4 : Xkcd</h3>
+          <img src="images/np_complete.png" width="600" style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Résoudre un problème de type "sac-à-dos".</p>
+          </div>
+        </section>
+        <section>
+          <h3>Solution</h3>
+          <p>
+            <ul>
+              <li>Représenter les prix par des nombres entiers</li>
+              <li>Faire une somme pondérée des quantités par le prix</li>
+            </ul>
+          </p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>Résoudre un problème complexe d'assignation de ressources.</p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>
+            On doit traiter des calculs de durées différentes appartenant à différents clients et ayant un
+            délai de rendu
+          </p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>Un nombre maximal de VM (ressources) utilisables (mais moins on en utilise, mieux c'est)</p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>A un instant <em>t</em>, une VM ne peut traiter qu'un seul calcul</p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>Sur une période d'une heure, on doit garantir pour chaque client un nombre minimal de calculs</p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>Au-delà, on accepte les dépassements de délai</p>
+        </section>
+        <section>
+          <h3>Problème n°5 : HPC</h3>
+          <p>Question : comment modéliser le problème ??</p>
+        </section>
+        <section>
+          <h3>Solution</h3>
+          <img src="images/scheduler.jpg" width="1000" style="vertical-align: middle; border: 0" />
+        </section>
       </section>
       <section>
         <section>
           <h2>Fonctionnement d'un solveur</h2>
-          <p>Cas des problèmes à variables à domaine fini et discret</p>
+          <p>Cas des problèmes à variables à domaine fini et discret (problème de satisfaction de contraintes)</p>
         </section>
         <section>
-          <p>Basiquement, construction et parcours d'un arbre de combinaisons</p>
+          <img src="images/tree.svg" width="400" height="400" style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Basiquement, construction et parcours d'un arbre</p>
+          </div>
           <aside class="notes">
             Problème principal : le nb de combinaisons invalides qu'on doit ignorer
           </aside>
         </section>
         <section>
           <h2>Recherche systématique</h2>
-          <ul>
-            <li>Generate and Test</li>
-            <li>Backtracking</li>
-            <aside class="notes">
-              Génération d'une solution, et test des contraintes, etc.<br />
-              Problème : certes exhaustif (on est sûr de trouver une solution si elle existe), mais très peu
-              efficient<br />
-              Recherche incrémentale, en choisissant des valeurs consistantes avec celles des variables déjà valuées. Si
-              une valeur n'est pas consistante, on revient en arrière dans l'arbre.<br />
-              Problèmes: échecs répétés pour les mêmes raisons (pas d'identification des causes d'un échec), travail
-              redondant (pas de mémorisation des conflits), détection des conflits trop tard (quand ils se
-              produisent).<br />
-              Il existe plein d'algorithmes de backtracking (AC-3, AC-6, ...)
-            </aside>
-          </ul>
+          <img src="images/generate_test.svg" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Generate and Test</p>
+          </div>
+          <aside class="notes">
+            Génération d'une solution, et test des contraintes, etc.<br />
+            Problème : certes exhaustif (on est sûr de trouver une solution si elle existe), mais très peu
+            efficient.
+          </aside>
+        </section>
+        <section>
+          <h2>Recherche systématique</h2>
+          <img src="images/backtracking.svg" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Backtracking</p>
+          </div>
+          <aside class="notes">
+            Recherche incrémentale, en choisissant des valeurs consistantes avec celles des variables déjà valuées. Si
+            une valeur n'est pas consistante, on revient en arrière dans l'arbre.<br />
+            Problèmes: échecs répétés pour les mêmes raisons (pas d'identification des causes d'un échec), travail
+            redondant (pas de mémorisation des conflits), détection des conflits trop tard (quand ils se
+            produisent).<br />
+            Il existe plein d'algorithmes de backtracking (AC-3, AC-6, ...)
+          </aside>
         </section>
         <section>
           <h3>Techniques de consistance</h3>
-          <p>Consistance locale (nœud, arc, k-path, ...)</p>
+          <img src="images/consistance.svg" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Consistance locale (nœud, arc, k-path, ...)</p>
+          </div>
           <aside class="notes">But : réduire l'espace de recherche; exemple nœud : X est pair -> on élimine tous les
             nombres impairs de D</aside>
         </section>
@@ -318,10 +387,14 @@
                 <li>Contraintes complexes et nombreuses</li>
                 <li>Problèmes avec fonction objective simple</li>
                 <li>Problèmes de décisions</li>
-                <li>Problèmes issus des domains où cela fonctionne classiquement</li>
+                <li>Problèmes issus des domaines où cela fonctionne classiquement</li>
               </ul>
             </dd>
           </dl>
+          <aside class="notes">
+            Point important avant de voir quels sont les patterns et techniques, c'est de savoir quand utiliser la PPC
+            !!
+          </aside>
         </section>
         <section>
           <h3>Domaines d'application</h3>
@@ -342,6 +415,7 @@
                 <li>Identifier les variables du problèmes</li>
                 <li>Attribuer un domaine aux variables -> taille du problème</li>
                 <li>Etablir la liste exhaustive des contraintes</li>
+                <li>Si possible, décomposer en sous-problèmes</li>
                 <li>Utiliser un algorithme naïf en premier (<em>Premature optimization...</em>), mesurer les
                   performances</li>
                 <li>Optimiser si besoin (temps, qualité des solutions) en changeant d'algorithme</li>
@@ -349,7 +423,8 @@
             </dd>
           </dl>
           <aside class="notes">
-            Pensez à la binarisation des contraintes (théorème).
+            Pensez à la binarisation des contraintes (théorème).<br />
+            Petit tip : essayer de rapprocher le problème d'un problème connu similaire.
           </aside>
         </section>
       </section>
@@ -368,6 +443,11 @@
           <li>https://sofdem.github.io/gccat/gccat/sec5.html</li>
           <aside class="notes">Global constraints catalog</aside>
         </ul>
+      </section>
+
+      <section>
+        <img src="images/blue-valet.png" style="vertical-align: middle; border: 0" />
+        <p>Code promo: DEVFEST5</p>
       </section>
 
       <section>
