@@ -74,7 +74,7 @@
           <aside class="notes">
             <ul>
               <li>Service de voiturier en gares et aéroports</li>
-              <li>Présent en France,Belgique, Espagne et Portugal (bientôt Italie)</li>
+              <li>Présent en France, Belgique, Espagne et Portugal (bientôt Italie)</li>
             </ul>
           </aside>
         </section>
@@ -162,12 +162,12 @@
           <p>Exemple classique : minimiser un coût</p>
         </section>
         <section>
-          <h3>Pas de solution = problème <em>sur-contraint</em></h3>
-          <p>On doit relaxer quelques contraintes pour obtenir une solution</p>
+          <h3>Problème <em>sur-contraint</em> (pas de solution)</h3>
+          <p>On peut relaxer des contraintes</p>
           <ul>
-            <li>En hiérarchisant les contraintes (requises, optionnelles, ...)</li>
-            <li>En attribuant des poids, et en le maximisant</li>
-            <li>En appliquant des coefficients aléatoires (fuzzy)</li>
+            <li>Hiérarchiser</li>
+            <li>Attribuer des poids (~= coût)</li>
+            <li>Coefficients aléatoires (fuzzy)</li>
           </ul>
         </section>
       </section>
@@ -279,9 +279,32 @@
           <p>Cas des problèmes à variables à domaine fini et discret (problème de satisfaction de contraintes)</p>
         </section>
         <section>
+            <h3>Problème : colorer une carte sans que deux pays partageant une frontière aient la même couleur</h3>
+        </section>
+        <section>
+          <img src="images/map_europe.jpg" width="600" height="400" style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Exemple de l'Europe de l'ouest</p>
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+        <section>
+          <img src="images/constraint_graph.svg" width="400" height="400" style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Graphe de contraintes : sommets = variables, arcs = contraintes</p>
+            <p>
+              D(V) =
+              <img src="images/domain_palette.svg" width="200" height="100" style="float: right; vertical-align: middle; border: 0" />
+            </p>
+          </div>
+          <aside class="notes">
+          </aside>
+        </section>
+        <section>
           <img src="images/tree.svg" width="400" height="400" style="float: left; vertical-align: middle; border: 0" />
           <div style="overflow: hidden; padding-left: 50px">
-            <p>Basiquement, construction et parcours d'un arbre</p>
+            <p>Résolution d'un CSP = construction et parcours d'un arbre</p>
           </div>
           <aside class="notes">
             Problème principal : le nb de combinaisons invalides qu'on doit ignorer
@@ -293,6 +316,7 @@
             style="float: left; vertical-align: middle; border: 0" />
           <div style="overflow: hidden; padding-left: 50px">
             <p>Generate and Test</p>
+            <p>On va générer une solution (= une branche de l'arbre, jusqu'à une feuille), puis la tester.</p>
           </div>
           <aside class="notes">
             Génération d'une solution, et test des contraintes, etc.<br />
@@ -318,7 +342,7 @@
         </section>
         <section>
           <h3>Techniques de consistance</h3>
-          <img src="images/consistance.svg" width="400" height="400"
+          <img src="images/arc_consistance.svg" width="400" height="400"
             style="float: left; vertical-align: middle; border: 0" />
           <div style="overflow: hidden; padding-left: 50px">
             <p>Consistance locale (nœud, arc, k-path, ...)</p>
@@ -328,37 +352,59 @@
         </section>
         <section>
           <h3>Propagation des contraintes</h3>
-          <p>Il s'agit d'utiliser les techniques de consistance, dans un algorithme de backtracking</p>
-          <ul>
-            <li>Forward checking</li>
-            <li>Look ahead (aka MAC - maintaining arc-consistency)</li>
-            <aside class="notes">
-              * Recherche d'arc-consistance à partir de la variable courant uniquement, sur des variables non-valuées.
-              Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides,
-              on revient en arrière sur la variable sélectionnée.<br />
-              * Forward checking, mais en appliquant une vérification d'arc-consistance complète (permet alors de
-              détruire toute une branche de l'arbre de recherche).
-            </aside>
-          </ul>
-        </section>
-        <section>
-          <h3>Ordonnancement du choix des variables et des valeurs</h3>
-          <p>Utilisation d'heuristiques : "first fail" pour les variables, "first succeed" pour la valeur</p>
+          <img src="images/forward_checking_1.svg" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Utiliser les techniques de consistance dans un algorithme de backtracking. Exemple : forward checking.</p>
+          </div>
           <aside class="notes">
-            En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en
-            construisant un arbre plus restreint.<br />
-            First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.
-            First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle
-            valeur peut réussir.
+            Recherche d'arc-consistance à partir d'une variable et une valeur courante uniquement, sur des variables non-valuées.
+            Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides,
+            on revient en arrière sur la variable sélectionnée, pour changer sa valeur.
           </aside>
         </section>
         <section>
-          <h3>Réduction de l'arbre de recherche</h3>
-          <ul>
-            <li>Théorie des graphes</li>
-            <li>Elimination du backtrack en ordonnant les nœuds du graphe</li>
-          </ul>
+          <h3>Propagation des contraintes</h3>
+          <img src="images/forward_checking_2.svg" width="400" height="400"
+            style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Utiliser les techniques de consistance dans un algorithme de backtracking. Exemple : forward checking.</p>
+          </div>
+          <aside class="notes">
+            Recherche d'arc-consistance à partir d'une variable et une valeur courante uniquement, sur des variables non-valuées.
+            Si on détecte un conflit, on retire temporairement la valeur du domaine. Si tous les domaines sont vides,
+            on revient en arrière sur la variable sélectionnée, pour changer sa valeur.
+          </aside>
         </section>
+        <section>
+          <h3>Ordonnancement du choix des variables</h3>
+          <img src="images/ordering_1.svg" width="400" height="400"
+              style="float: left; vertical-align: middle; border: 0" />
+          <div style="overflow: hidden; padding-left: 50px">
+            <p>Utilisation d'heuristiques : "first fail"</p>
+          </div>
+          <aside class="notes">
+            En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en
+            construisant un arbre plus restreint.<br />
+            First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.<br/>
+            Heuristique : Minimal Remaining Values (moins de valeurs à assigner) + Degree heuristic (=Most constrining Variable) => first fail<br/>
+          </aside>
+        </section>
+        <section>
+            <h3>Ordonnancement du choix des valeurs</h3>
+            <img src="images/ordering_2.svg" width="400" height="400"
+                style="float: left; vertical-align: middle; border: 0" />
+            <div style="overflow: hidden; padding-left: 50px">
+              <p>Utilisation d'heuristiques : "first succeed"</p>
+            </div>
+            <aside class="notes">
+              En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en
+              construisant un arbre plus restreint.<br />
+              First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle
+              valeur peut réussir.<br/>
+              Heuristique : Least Constraining Variable (variable avec le moins de contraintes = flexibilité) = first succeed
+            </aside>
+          </section>
         <section>
           <h2>Algorithmes heuristiques et stochastiques</h2>
           <ul>
@@ -414,11 +460,10 @@
               <ol>
                 <li>Identifier les variables du problèmes</li>
                 <li>Attribuer un domaine aux variables -> taille du problème</li>
-                <li>Etablir la liste exhaustive des contraintes</li>
-                <li>Si possible, décomposer en sous-problèmes</li>
-                <li>Utiliser un algorithme naïf en premier (<em>Premature optimization...</em>), mesurer les
-                  performances</li>
-                <li>Optimiser si besoin (temps, qualité des solutions) en changeant d'algorithme</li>
+                <li>Etablir la liste des contraintes</li>
+                <li>Décomposer en sous-problèmes</li>
+                <li>Utiliser un algorithme naïf, mesurer</li>
+                <li>Optimiser</li>
               </ol>
             </dd>
           </dl>
@@ -437,11 +482,15 @@
         <h2>Liens utiles</h2>
         <ul>
           <li>http://ktiml.mff.cuni.cz/~bartak/constraints/</li>
-          <aside class="notes">Guide en ligne, Roman Bartak</aside>
           <li>les documentations de choco-solver, optaplanner, OscaR, ...</li>
           <li>http://www.hakank.org/constraint_programming_blog/</li>
           <li>https://sofdem.github.io/gccat/gccat/sec5.html</li>
-          <aside class="notes">Global constraints catalog</aside>
+          <li>https://www.ics.uci.edu/~welling/teaching/271fall09/CSP271fall09.pdf</li>
+          <aside class="notes">
+              Guide en ligne, Roman Bartak<br/>
+              Hakan Kjellerstrand
+              Global constraints catalog<br/>
+          </aside>
         </ul>
       </section>
 
