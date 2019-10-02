@@ -106,7 +106,7 @@
           </dl>
           <br />
           <br />
-          <code>X &lt; Y</code>
+          <code>X &lt; Y, allDifferent(array), X + Y + Z² = 45, …</code>
         </section>
         <section>
           <dl>
@@ -133,13 +133,19 @@
         </section>
         <section>
           <dl>
-            <dt>Programmation par contraintes</dt>
-            <dd>Méthode de modélisation et résolution de problèmes combinatoires sous la forme de problèmes de
-              satisfaction de contraintes.</dd>
+            <dt>Problème de satisfaction de contraintes (CSP)</dt>
+            <dd>Modélisation d'un problème sous la forme d'un triplet:</dd>
           </dl>
           <br />
           <br />
           <code>P = ((V<sub>1</sub>,..,V<sub>k</sub>) ∈ D<sub>1</sub>×..×D<sub>k</sub>, {C<sub>1</sub>,...,C<sub>n</sub>})</code>
+        </section>
+        <section>
+          <dl>
+            <dt>Programmation par contraintes</dt>
+            <dd>Méthode de modélisation et résolution de problèmes combinatoires sous la forme de problèmes de
+              satisfaction de contraintes.</dd>
+          </dl>
         </section>
         <section>
           <p>Résoudre un problème de satisfaction de contraintes</p>
@@ -165,6 +171,7 @@
           <h3>Problème <em>sur-contraint</em> (pas de solution)</h3>
           <p>On peut relaxer des contraintes</p>
           <ul>
+            <li>Suppression</li>
             <li>Hiérarchiser</li>
             <li>Attribuer des poids (~= coût)</li>
             <li>Coefficients aléatoires (fuzzy)</li>
