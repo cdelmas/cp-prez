@@ -223,7 +223,7 @@
             style="float: left; vertical-align: middle; border: 0" />
           <div style="overflow: hidden; padding-left: 50px">
             <p>Théorème de Pythagore :<br /> <code>c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></code></p>
-            <p>Contrainte de périmètre : <br /> <code>a + b + c ≤ 200</code></p>
+            <p>Contrainte de périmètre : <br /> <code>a + b + c &lt; 200</code></p>
             <p>Quel domaine pour les variables ?</p>
           </div>
         </section>
@@ -312,6 +312,9 @@
         <section>
           <h2>Fonctionnement d'un solveur</h2>
           <p>Cas des problèmes à variables à domaine fini et discret (problème de satisfaction de contraintes)</p>
+        </section>
+        <section>
+          <img src="images/ppc_engine_overview.png" width="800" height="600" style="float: left; vertical-align: middle; border: 0" />
         </section>
         <section>
             <h3>Problème : colorer une carte sans que deux pays partageant une frontière aient la même couleur</h3>
@@ -422,7 +425,7 @@
             En ordonnant les assignations et donc les vérifications de consistance, on peut gagner beaucoup de temps en
             construisant un arbre plus restreint.<br />
             First fail -> permet d'éliminer des branches de l'arbre là où on pense qu'on va échouer.<br/>
-            Heuristique : Minimal Remaining Values (moins de valeurs à assigner) + Degree heuristic (=Most constrining Variable) => first fail<br/>
+            Heuristique : Minimal Remaining Values (moins de valeurs compatibles à assigner) + Degree heuristic (=Most constraining Variable) => first fail<br/>
           </aside>
         </section>
         <section>
@@ -437,7 +440,8 @@
               construisant un arbre plus restreint.<br />
               First succeed -> permet de tenter de trouver une solution là où on pense que l'affectation d'une telle
               valeur peut réussir.<br/>
-              Heuristique : Least Constraining Variable (variable avec le moins de contraintes = flexibilité) = first succeed
+              Heuristique : Least Constraining Variable (variable avec le moins de contraintes = flexibilité pour l’affectation des autres variables) 
+              = first succeed
             </aside>
           </section>
         <section>
